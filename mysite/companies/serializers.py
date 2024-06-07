@@ -2,12 +2,14 @@ from rest_framework import serializers
 from .models import Company
 from locations.models import Location
 from contacts.models import Contact
+from locations.serializers import LocationSerializer
 
 class CompanySerializer(serializers.ModelSerializer):
     headquarters = serializers.SerializerMethodField()
     locations = serializers.SerializerMethodField()
     employees = serializers.SerializerMethodField()
 
+    CompanyHome = LocationSerializer(read_only=True)
     class Meta:
         model = Company
         fields = '__all__'
